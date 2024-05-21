@@ -1,5 +1,6 @@
-package com.example.backendchallenge.entity.categories;
+package com.example.backendchallenge.entity.store.products.categories;
 
+import com.example.backendchallenge.entity.store.products.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

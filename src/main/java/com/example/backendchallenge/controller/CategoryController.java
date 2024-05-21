@@ -1,6 +1,6 @@
 package com.example.backendchallenge.controller;
 
-import com.example.backendchallenge.entity.categories.Category;
+import com.example.backendchallenge.entity.store.products.categories.Category;
 import com.example.backendchallenge.repository.CategoryRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

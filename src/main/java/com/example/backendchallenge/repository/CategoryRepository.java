@@ -1,7 +1,6 @@
 package com.example.backendchallenge.repository;
 
-import com.example.backendchallenge.entity.categories.Category;
-import com.example.backendchallenge.entity.categories.Gender;
+import com.example.backendchallenge.entity.store.products.categories.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
