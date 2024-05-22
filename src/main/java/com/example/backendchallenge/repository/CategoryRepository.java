@@ -11,6 +11,6 @@ public interface CategoryRepository extends JpaRepository <Category,Long> {
     @Query(value = "SELECT * FROM backendchallenge.categories",nativeQuery = true)
     List<Category> getAllCategoryData();
     @Query(value = "SELECT CONCAT(c.title,'-',c.gender) AS category FROM backendchallenge.categories c GROUP BY c.title,c.gender", nativeQuery = true)
-    List<String> getCategories();
+    List<String> getCategoriesByGender();
 
 }

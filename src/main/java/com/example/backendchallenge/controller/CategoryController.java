@@ -24,8 +24,8 @@ public class CategoryController {
         return categoryRepository.getAllCategoryData();
     }
     @GetMapping("/get")
-    public List<String> getCategories() {
-        return categoryRepository.getCategories();
+    public List<String> getCategoriesByGender() {
+        return categoryRepository.getCategoriesByGender();
 
 
     }
