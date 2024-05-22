@@ -18,7 +18,7 @@ public class CategoryController {
     public CategoryController(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
-    /*
+
     @GetMapping
     public List<Category> getAllCategoryData(){
         return categoryRepository.getAllCategoryData();
@@ -30,6 +30,6 @@ public class CategoryController {
 
     }
 
-     */
+
 
 }
