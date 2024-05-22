@@ -1,10 +1,11 @@
-package com.example.backendchallenge.entity.store.products;
+package com.example.backendchallenge.entity.store;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -29,7 +30,18 @@ public class Product {
     private double rating;
     @Column(name = "sell_count")
     private int sell_count;
-    @Column(name = "images")
-    private List<Images> images;
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(name="products_categories",schema="backendchallenge",
+            joinColumns = @JoinColumn(name="product_id"),
+            inverseJoinColumns = @JoinColumn(name="category_id")
+    )
+    private List<Category> categoriesList;
+    public void addCategories(Category category){
+        if(categoriesList == null){
+            categoriesList = new ArrayList<>();
+        }
+        categoriesList.add(category);
+    }
+
 
 }

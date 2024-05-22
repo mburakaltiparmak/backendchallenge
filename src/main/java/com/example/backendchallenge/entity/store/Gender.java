@@ -1,4 +1,6 @@
 package com.example.backendchallenge.entity.store;
 
-public class Cart {
+public enum Gender {
+    K,
+    E;
 }
