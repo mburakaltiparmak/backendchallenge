@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -20,20 +18,28 @@ import java.util.Set;
 public class ApplicationUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Integer user_id;
-    @Column(name = "name",nullable = false)
-    private String name;
+   // @Column(name = "id")
+    private Long id;
+    @Column(name = "fullName",nullable = false)
+    private String fullName;
     @Column(name = "email",nullable = false)
     private String email;
     @Column(name = "password",nullable = false)
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",schema = "backendchallenge",
             joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> authorities = new HashSet<>();
 
+    /*
+    @ManyToMany
+    @JoinTable(name = "role",schema = "backendchallenge",
+    joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name="role_id")})
+    private List<Role> roles = new ArrayList<>();
+*/
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

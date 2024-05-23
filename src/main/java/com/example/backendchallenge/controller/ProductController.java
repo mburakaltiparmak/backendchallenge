@@ -1,6 +1,5 @@
 package com.example.backendchallenge.controller;
 
-import com.example.backendchallenge.dto.ProductDto;
 import com.example.backendchallenge.entity.store.Product;
 import com.example.backendchallenge.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

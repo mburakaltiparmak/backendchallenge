@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class AuthenticationService {
@@ -25,17 +24,23 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public ApplicationUser register(String name,String email,String password){
-    String encodedPassword = passwordEncoder.encode(password);
-    Role userRole = roleRepository.findByAuthority("USER").get();
+    public ApplicationUser register(String fullName, String email, String password) {
+
+        String encodedPassword = passwordEncoder.encode(password);
+        Role userRole = roleRepository.findByAuthority("USER").get();
+
         Set<Role> roles = new HashSet<>();
         roles.add(userRole);
-    ApplicationUser user = new ApplicationUser();
-    user.setName(name);
-    user.setEmail(email);
-    user.setPassword(encodedPassword);
-    user.setAuthorities(roles);
-    return userRepository.save(user);
+
+        ApplicationUser user = new ApplicationUser();
+        user.setFullName(fullName);
+        user.setEmail(email);
+        user.setPassword(encodedPassword);
+        user.setAuthorities(roles);
+        
+        return userRepository.save(user);
+
 
     }
 }
+

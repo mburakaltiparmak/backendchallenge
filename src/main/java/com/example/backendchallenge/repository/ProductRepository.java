@@ -1,6 +1,5 @@
 package com.example.backendchallenge.repository;
 
-import com.example.backendchallenge.dto.ProductDto;
 import com.example.backendchallenge.entity.store.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
