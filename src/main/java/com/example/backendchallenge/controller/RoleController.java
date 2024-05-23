@@ -20,8 +20,5 @@ public class RoleController {
     public List<Role> getRoles(){
         return roleRepository.getRoles();
     }
-    @GetMapping("/welcome")
-    public String welcome(){
-        return "welcome";
-    }
+
 }
