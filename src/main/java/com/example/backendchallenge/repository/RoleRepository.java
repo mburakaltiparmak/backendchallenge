@@ -13,7 +13,7 @@ public interface RoleRepository extends JpaRepository <Role,Long>{
     @Query(value = "SELECT * FROM backendchallenge.role",nativeQuery = true)
     List<Role> getRoles();
 
-    @Query(value = "SELECT r FROM backendchallenge.role r WHERE r.authority =:authority",nativeQuery = true)
+    @Query(value = "SELECT * FROM backendchallenge.role WHERE authority = 'USER'",nativeQuery = true)
     Optional<Role> findByAuthority(@Param("authority") String authority);
 
 }

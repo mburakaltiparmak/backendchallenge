@@ -17,6 +17,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(exception.getMessage());
         return new ResponseEntity<>(errorResponse,exception.getHttpStatus());
     }
+
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleException(Exception exception){
         log.error("Unknown exception occured! Exception details : ",exception.getMessage());

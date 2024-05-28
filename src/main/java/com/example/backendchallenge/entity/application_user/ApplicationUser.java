@@ -32,14 +32,21 @@ public class ApplicationUser implements UserDetails {
     @JoinTable(name = "user_roles",schema = "backendchallenge",
             joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> authorities = new HashSet<>();
 
 
+
+
+
+private Set<Role> authorities = new HashSet<>();
+    /*
     @ManyToMany
     @JoinTable(name = "role",schema = "backendchallenge",
     joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name="role_id")})
-    private List<Role> roles = new ArrayList<>();
+            private List<Role> roles = new ArrayList<>();
+
+*/
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
