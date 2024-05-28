@@ -36,6 +36,7 @@ public class SecurityConfig {
     }
 
      */
+
     @Bean
     public AuthenticationManager authManager(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -56,14 +57,16 @@ public class SecurityConfig {
 
     }
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         //httpSecurity.cors().configurationSource(corsConfigurationSource());
         return httpSecurity.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/auth/**").permitAll();
+                    auth.requestMatchers("/role/**").permitAll();
                     auth.requestMatchers("/admin/**").hasAuthority("ADMIN");
-                    auth.requestMatchers("/welcome/**").hasAnyAuthority("USER", "ADMIN");
+                    auth.requestMatchers("/welcome/**").hasAnyAuthority("USER");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(Customizer.withDefaults())

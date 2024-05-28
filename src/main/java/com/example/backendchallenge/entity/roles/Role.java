@@ -17,16 +17,16 @@ import java.util.Set;
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @Column(name = "id")
+    @Column(name = "id")
     private Long id;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "name")
     private Name name;
+
     @Enumerated(value = EnumType.STRING)
     @Column(name = "code")
     private Code code;
-
 
     @Column(name = "authority")
     private String authority;

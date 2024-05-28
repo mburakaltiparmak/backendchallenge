@@ -1,4 +1,14 @@
 package com.example.backendchallenge.dto;
 
-public record RegisterUser(String fullName,String email,String password) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class RegisterUser {
+    private String fullName;
+        private String email;
+        private String password;
 }

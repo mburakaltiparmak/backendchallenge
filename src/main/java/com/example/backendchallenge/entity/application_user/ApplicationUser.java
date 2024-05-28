@@ -18,8 +18,9 @@ import java.util.*;
 public class ApplicationUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @Column(name = "id")
+    //@Column(name = "id")
     private Long id;
+
     @Column(name = "fullName",nullable = false)
     private String fullName;
     @Column(name = "email",nullable = false)
@@ -33,13 +34,13 @@ public class ApplicationUser implements UserDetails {
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> authorities = new HashSet<>();
 
-    /*
+
     @ManyToMany
     @JoinTable(name = "role",schema = "backendchallenge",
     joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name="role_id")})
     private List<Role> roles = new ArrayList<>();
-*/
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

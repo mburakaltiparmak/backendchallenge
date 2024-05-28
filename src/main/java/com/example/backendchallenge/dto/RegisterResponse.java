@@ -1,4 +1,4 @@
 package com.example.backendchallenge.dto;
 
-public record RegisterResponse(String email,String message) {
+public record RegisterResponse(String fullName,String email,String message) {
 }
