@@ -65,8 +65,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/auth/**").permitAll();
                     auth.requestMatchers("/role/**").permitAll();
-                    auth.requestMatchers("/admin/**").hasAuthority("ADMIN");
-                    auth.requestMatchers("/welcome/**").hasAnyAuthority("USER");
+                    auth.requestMatchers("/category/**").permitAll();
+                    auth.requestMatchers("/card/**").permitAll();
+                    auth.requestMatchers("/address/**").permitAll();
+                    auth.requestMatchers("/order/**").hasAnyAuthority("User","Admin");
+                    auth.requestMatchers("/admin/**").hasAuthority("Admin");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(Customizer.withDefaults())
