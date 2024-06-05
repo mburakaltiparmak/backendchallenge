@@ -24,19 +24,26 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public ApplicationUser register(String fullName, String email, String password) {
+    public ApplicationUser register(String fullName, String email, String password,String role) {
 
         String encodedPassword = passwordEncoder.encode(password);
-        Role userRole = roleRepository.findByAuthority("USER").get();
+        Role userRole = roleRepository.findByAuthority(role)
+               /* .orElseThrow(() -> new RuntimeException("Role not found: " + role));*/
+                .orElseGet(() -> {
+                    Role newRole = new Role();
+                    newRole.setRole(role);
+                
+                    return roleRepository.save(newRole);
+                });
 
-        Set<Role> roles = new HashSet<>();
+        List<Role> roles = new ArrayList<>();
         roles.add(userRole);
 
         ApplicationUser user = new ApplicationUser();
         user.setFullName(fullName);
         user.setEmail(email);
         user.setPassword(encodedPassword);
-        user.setAuthorities(roles);
+        user.setRoles(roles);
         
         return userRepository.save(user);
 

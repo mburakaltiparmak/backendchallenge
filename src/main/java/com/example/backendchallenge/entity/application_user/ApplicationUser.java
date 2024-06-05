@@ -1,6 +1,7 @@
 package com.example.backendchallenge.entity.application_user;
 
 import com.example.backendchallenge.entity.roles.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -27,30 +29,22 @@ public class ApplicationUser implements UserDetails {
     private String email;
     @Column(name = "password",nullable = false)
     private String password;
+    private Role role;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",schema = "backendchallenge",
             joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonIgnoreProperties("users")
+    private List<Role> roles = new ArrayList<>();
 
-
-
-
-
-private Set<Role> authorities = new HashSet<>();
-    /*
-    @ManyToMany
-    @JoinTable(name = "role",schema = "backendchallenge",
-    joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name="role_id")})
-            private List<Role> roles = new ArrayList<>();
-
-*/
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return roles.stream()
+                .map(role -> (GrantedAuthority) role::getAuthority)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -82,4 +76,9 @@ private Set<Role> authorities = new HashSet<>();
     public boolean isEnabled() {
         return true;
     }
+    public String getRole() {
+        return roles.isEmpty() ? null : roles.get(0).getRole();
+    }
+
+
 }

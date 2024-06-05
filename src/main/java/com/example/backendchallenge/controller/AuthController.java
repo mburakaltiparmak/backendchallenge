@@ -25,7 +25,7 @@ public class AuthController {
 
 @PostMapping("/register")
     public RegisterResponse register(@RequestBody RegisterUser registerUser){
-        ApplicationUser createdUser = authenticationService.register(registerUser.getFullName(), registerUser.getEmail(), registerUser.getPassword());
-       return new RegisterResponse(createdUser.getFullName(), createdUser.getEmail(), "kayıt başarılı bir şekilde gerçekleşti.");
+        ApplicationUser createdUser = authenticationService.register(registerUser.getFullName(), registerUser.getEmail(), registerUser.getPassword(), registerUser.getRole());
+       return new RegisterResponse(createdUser.getFullName(), createdUser.getEmail(),createdUser.getRole(),createdUser.getFullName() + " " + "kişisi başarılı şekilde" + " " + registerUser.getRole() + " " + "olarak kaydedildi.");
     }
 }

@@ -10,10 +10,9 @@ import java.util.Optional;
 
 public interface RoleRepository extends JpaRepository <Role,Long>{
 
-    @Query(value = "SELECT * FROM backendchallenge.role",nativeQuery = true)
+    @Query(value = "SELECT * FROM backendchallenge.role_graph", nativeQuery = true)
     List<Role> getRoles();
 
-    @Query(value = "SELECT * FROM backendchallenge.role WHERE authority = 'USER'",nativeQuery = true)
-    Optional<Role> findByAuthority(@Param("authority") String authority);
-
+    @Query(value = "SELECT * FROM backendchallenge.role_graph WHERE role_graph.role = :role", nativeQuery = true)
+    Optional<Role> findByAuthority(@Param("role") String role);
 }
