@@ -68,6 +68,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/category/**").permitAll();
                     auth.requestMatchers("/card/**").permitAll();
                     auth.requestMatchers("/address/**").permitAll();
+                    auth.requestMatchers("/products/**").permitAll();
                     auth.requestMatchers("/order/**").hasAnyAuthority("User","Admin");
                     auth.requestMatchers("/admin/**").hasAuthority("Admin");
                     auth.anyRequest().authenticated();

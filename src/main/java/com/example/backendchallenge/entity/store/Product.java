@@ -1,5 +1,6 @@
 package com.example.backendchallenge.entity.store;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +17,8 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Integer id;
+    //@Column(name="id")
+    private Long id;
     @Column(name = "name",nullable = false)
     private String name;
     @Column(name = "description")
@@ -30,18 +31,10 @@ public class Product {
     private double rating;
     @Column(name = "sell_count")
     private int sell_count;
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name="products_categories",schema="backendchallenge",
-            joinColumns = @JoinColumn(name="product_id"),
-            inverseJoinColumns = @JoinColumn(name="category_id")
-    )
-    private List<Category> categoriesList;
-    public void addCategories(Category category){
-        if(categoriesList == null){
-            categoriesList = new ArrayList<>();
-        }
-        categoriesList.add(category);
-    }
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "category_id")
+    @JsonIgnoreProperties("products")
+    private Category category;
 
 
 }

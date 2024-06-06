@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository <Category,Long> {
 
-    @Query(value = "SELECT * FROM backendchallenge.categories",nativeQuery = true)
+    @Query(value = "SELECT * FROM backendchallenge.category",nativeQuery = true)
     List<Category> getAllCategoryData();
-    @Query(value = "SELECT CONCAT(c.title,'-',c.gender) AS category FROM backendchallenge.categories c GROUP BY c.title,c.gender", nativeQuery = true)
+    @Query(value = "SELECT CONCAT(c.title,'-',c.gender) AS category FROM backendchallenge.category c GROUP BY c.title,c.gender", nativeQuery = true)
     List<String> getCategoriesByGender();
 
 }

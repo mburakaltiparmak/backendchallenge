@@ -1,28 +1,41 @@
 package com.example.backendchallenge.controller;
 
+import com.example.backendchallenge.dto.ProductResponse;
 import com.example.backendchallenge.entity.store.Product;
 import com.example.backendchallenge.repository.ProductRepository;
+import com.example.backendchallenge.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+    private ProductService productService;
     private ProductRepository productRepository;
 
     @Autowired
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping
-    public List<Product> getProducts() {
-        return productRepository.getProducts();
+    public ResponseEntity<List<Product>> getAllProducts(){
+        List<Product> products = productService.getAllProducts();
+        return ResponseEntity.ok(products);
     }
+    @PostMapping("/new")
+    public ProductResponse createProduct(@RequestBody Product product){
+        return productService.addProduct(product);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 }
