@@ -31,6 +31,10 @@ public class Product {
     private double rating;
     @Column(name = "sell_count")
     private int sell_count;
+    @Column(name = "size")
+    private String size;
+    @Column(name = "images")
+    private String[] images;
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")
